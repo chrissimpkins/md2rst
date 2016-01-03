@@ -5,6 +5,7 @@
 #
 #  md2rst
 #  Copyright 2016 Christopher Simpkins
+#  Source: https://github.com/chrissimpkins/md2rst
 #  MIT license
 #
 #  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -13,9 +14,9 @@ import sys
 import os
 import subprocess
 
-# check for presence of an installed system executable by executable name
-#  see http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
+#  Modified from http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
 def which(program):
+    """Test for the existence of an executable by defined executable path or on the system PATH"""
     fpath, fname = os.path.split(program)
     if fpath:
         if os.path.isfile(program) and os.access(program, os.X_OK):
@@ -26,10 +27,10 @@ def which(program):
             exe_file = os.path.join(path, program)
             if os.path.isfile(exe_file) and os.access(exe_file, os.X_OK):
                 return exe_file
-
     return None
 
 def execute(command):
+    """Execute a system command with the Python subprocess module"""
     try:
         response = subprocess.call(command, shell=True)
         if response == 0:
@@ -41,6 +42,7 @@ def execute(command):
         sys.exit(1)
 
 def convert(mdpath, rstpath):
+    """Convert a Markdown file to a reStructuredText file with the Pandoc executable"""
     command = "pandoc --from=markdown --to=rst --output=" + rstpath + " " + mdpath
     return execute(command)  # returns True or False based upon success of execution
 
