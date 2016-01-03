@@ -9,34 +9,29 @@
 #
 #  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
-
 import sys
 import os
 
-# check for presence of installed system executable
+# check for presence of an installed system executable by executable name
 #  see http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
-def is_exe(fpath):
-    return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
 
 def which(program):
     fpath, fname = os.path.split(program)
     if fpath:
-        if is_exe(program):
+        if os.path.isfile(program) and os.access(program, os.X_OK):
             return program
     else:
         for path in os.environ["PATH"].split(os.pathsep):
             path = path.strip('"')
             exe_file = os.path.join(path, program)
-            if is_exe(exe_file):
+            if os.path.isfile(exe_file) and os.access(exe_file, os.X_OK):
                 return exe_file
 
     return None
 
 
 def main(args):
-    # test for pandoc executable install on system
-    if which("pandoc") is not None:
+    if which("pandoc") is not None:   # test for pandoc install on system
         mdpath = ""
         rstpath = ""
 
