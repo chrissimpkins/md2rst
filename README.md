@@ -44,7 +44,7 @@ Navigate to the top level of the repository and install `md2rst` with the follow
 $ make install
 ```
 
-`md2rst` is installed on the path `/usr/local/bin/md2rst` by default.  You can modify the [prefix variable in the Makefile](https://github.com/chrissimpkins/md2rst/blob/master/Makefile#L1) to change the install directory.
+`md2rst` is installed on the path `/usr/local/bin/md2rst` by default.  You can modify the [prefix variable in the Makefile](https://github.com/chrissimpkins/md2rst/blob/master/Makefile#L1) to change the install path.
 
 ## Usage
 
