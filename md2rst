@@ -1,0 +1,67 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#
+#  md2rst
+#  Copyright 2016 Christopher Simpkins
+#  MIT license
+#
+#  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+import sys
+import os
+
+# check for presence of installed system executable
+#  see http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
+def is_exe(fpath):
+    return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+
+def which(program):
+    fpath, fname = os.path.split(program)
+    if fpath:
+        if is_exe(program):
+            return program
+    else:
+        for path in os.environ["PATH"].split(os.pathsep):
+            path = path.strip('"')
+            exe_file = os.path.join(path, program)
+            if is_exe(exe_file):
+                return exe_file
+
+    return None
+
+
+def main(args):
+    # test for pandoc executable install on system
+    if which("pandoc") is not None:
+        mdpath = ""
+        rstpath = ""
+
+        if len(args) == 2:
+            pathone = args[0]
+            pathtwo = args[1]
+
+            if pathone.lower.endswith(".md"):
+                mdpath = pathone
+            elif pathtwo.lower.endswith(".md"):
+                mdpath = pathtwo
+            elif pathone.lower() == "readme":
+                mdpath = pathone
+            elif pathtwo.lower() == "readme":
+                mdpath = pathtwo
+            else:
+                sys.stderr.write("[md2rst] Error: Unable to detect the Markdown file in your command.  Please use a Markdown file path that has a .md extension or uses the non-case sensitive file name README.")
+                sys.exit(1)
+        elif len(args) == 1:
+            mdpath = args[0]
+
+    else:
+        sys.stderr.write("[md2rst] Error: Pandoc was not found on your system.  Please install Pandoc and then try again.\n")
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
