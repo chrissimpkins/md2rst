@@ -1,12 +1,12 @@
 # md2rst
 
-> Markdown to reStructuredText conversion script for Unix and Linux
+> A Python Markdown to reStructuredText conversion script for Unix and Linux
 
 ### What is md2rst?
 
-`md2rst` is a Python script that converts Markdown syntax files to reStructuredText syntax files with [Pandoc](http://pandoc.org).  Pandoc must be installed in order to use the script.
+`md2rst` is a Python script that converts Markdown syntax files to reStructuredText syntax files with [Pandoc](http://pandoc.org).  Pandoc does all of the heavy lifting and must be installed in order to use the script.
 
-### Quickstart
+## Quickstart
 
 - Confirm that Pandoc is installed on your system
 - `$ git clone https://github.com/chrissimpkins/md2rst.git`
@@ -14,9 +14,9 @@
 - `$ md2rst [Markdown file path]` (.rst file write defaults to same directory and original filename)
 - `$ md2rst [Markdown file path] [rst file path]` (define .rst file path)
 
-### Install
+## Install
 
-#### Install Pandoc
+### Install Pandoc
 
 Install Pandoc using the [install instructions](http://pandoc.org/installing.html) provided on pandoc.org.
 
@@ -35,3 +35,33 @@ Navigate to the top level of the repository and install `md2rst` with the follow
 ```
 $ make install
 ```
+
+`md2rst` is installed on the path `/usr/local/bin/md2rst` by default.  You can modify the [prefix variable in the Makefile](https://github.com/chrissimpkins/md2rst/blob/master/Makefile#L1) to change the install directory.
+
+## Usage
+
+### Default
+
+```
+$ md2rst [Markdown file path]
+```
+
+By default, `md2rst` writes the reStructuredText file in the directory that contains the Markdown file and uses the same base file name as the Markdown file.
+
+### Define reStructuredText file path
+
+```
+$ md2rst [Markdown file path] [rst file path]
+```
+
+Add a second argument to define the reStructuredText file path.  The order of the file paths in the command is not relevant if you either:
+
+- include a Markdown file that has a .md file extension
+- include a Markdown file named README (case-insensitive)
+
+## Issues
+
+If you have any problems with the script, please [file a new issue report](https://github.com/chrissimpkins/md2rst/issues/new) on the Github repository.
+
+## License
+`md2rst` is licensed under the MIT license.  The full text of the license is available [here](https://github.com/chrissimpkins/md2rst/blob/master/LICENSE).
