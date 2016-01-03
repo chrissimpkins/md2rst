@@ -29,6 +29,21 @@ def which(program):
 
     return None
 
+def execute(command):
+    try:
+        response = subprocess.call(command, shell=True)
+        if response == 0:
+            return True
+        else:
+            return False
+    except subprocess.CalledProcessError as cpe:
+        sys.stderr.write("[md2rst] Error: There was an error with the execution of Pandoc. " + str(cpe.output))
+        sys.exit(1)
+
+def convert(mdpath, rstpath):
+    command = "pandoc --from=markdown --to=rst --output=" + rstpath + " " + mdpath
+    return execute(command)  # returns True or False based upon success of execution
+
 
 def main(args):
     if which("pandoc") is not None:   # test for pandoc install on system
@@ -50,8 +65,29 @@ def main(args):
             else:
                 sys.stderr.write("[md2rst] Error: Unable to detect the Markdown file in your command.  Please use a Markdown file path that has a .md extension or uses the non-case sensitive file name README.")
                 sys.exit(1)
+
+            if convert(mdpath, rstpath) is True:
+                response_string = "[md2rst] '" + mdpath + "'' was converted to '" + rstpath + "'."
+                print(response_string)
+                sys.exit(0)
+            else:
+                sys.stderr.write("[md2rst] Error: There was an unspecified error with the Pandoc conversion")
+                sys.exit(1)
         elif len(args) == 1:
             mdpath = args[0]
+            if "." in mdpath:
+                rstpath_pre = os.path.basename(mdpath)
+                rstpath = rstpath_pre + ".rst"
+            else:
+                rstpath = mdpath + ".rst"
+
+            if convert(mdpath, rstpath) is True:
+                response_string = "[md2rst] '" + mdpath + "'' was converted to '" + rstpath + "'."
+                print(response_string)
+                sys.exit(0)
+            else:
+                sys.stderr.write("[md2rst] Error: There was an unspecified error with the Pandoc conversion")
+                sys.exit(1)
 
     else:
         sys.stderr.write("[md2rst] Error: Pandoc was not found on your system.  Please install Pandoc and then try again.\n")
