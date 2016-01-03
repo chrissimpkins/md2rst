@@ -11,10 +11,10 @@
 
 import sys
 import os
+import subprocess
 
 # check for presence of an installed system executable by executable name
 #  see http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
-
 def which(program):
     fpath, fname = os.path.split(program)
     if fpath:
@@ -54,14 +54,18 @@ def main(args):
             pathone = args[0]
             pathtwo = args[1]
 
-            if pathone.lower.endswith(".md"):
+            if pathone.lower().endswith(".md"):
                 mdpath = pathone
-            elif pathtwo.lower.endswith(".md"):
+                rstpath = pathtwo
+            elif pathtwo.lower().endswith(".md"):
                 mdpath = pathtwo
+                rstpath = pathone
             elif pathone.lower() == "readme":
                 mdpath = pathone
+                rstpath = pathtwo
             elif pathtwo.lower() == "readme":
                 mdpath = pathtwo
+                rstpath = pathone
             else:
                 sys.stderr.write("[md2rst] Error: Unable to detect the Markdown file in your command.  Please use a Markdown file path that has a .md extension or uses the non-case sensitive file name README.")
                 sys.exit(1)
@@ -71,12 +75,13 @@ def main(args):
                 print(response_string)
                 sys.exit(0)
             else:
-                sys.stderr.write("[md2rst] Error: There was an unspecified error with the Pandoc conversion")
+                sys.stderr.write("[md2rst] Error: There was an error with the Pandoc conversion")
                 sys.exit(1)
         elif len(args) == 1:
             mdpath = args[0]
             if "." in mdpath:
-                rstpath_pre = os.path.basename(mdpath)
+                rstpath_base = os.path.basename(mdpath)
+                rstpath_pre = rstpath_base.split(".")[0]
                 rstpath = rstpath_pre + ".rst"
             else:
                 rstpath = mdpath + ".rst"
@@ -86,7 +91,7 @@ def main(args):
                 print(response_string)
                 sys.exit(0)
             else:
-                sys.stderr.write("[md2rst] Error: There was an unspecified error with the Pandoc conversion")
+                sys.stderr.write("[md2rst] Error: There was an error with the Pandoc conversion")
                 sys.exit(1)
 
     else:
@@ -95,4 +100,8 @@ def main(args):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    if len(sys.argv) < 2:
+        sys.stderr.write("[md2rst] Error: Please include at least one filepath argument in your command.\n")
+        sys.exit(1)
+    else:
+        main(sys.argv[1:])
