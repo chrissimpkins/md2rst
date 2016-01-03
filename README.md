@@ -20,6 +20,14 @@
 
 Install Pandoc using the [install instructions](http://pandoc.org/installing.html) provided on pandoc.org.
 
+Confirm your Pandoc install with:
+
+```
+$ which pandoc
+```
+
+If the above command reports a path to your `pandoc` executable, you're good to go.
+
 ### Install `md2rst`
 
 Obtain the repository files with git:
