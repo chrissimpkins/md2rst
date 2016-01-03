@@ -67,6 +67,20 @@ Add a second argument to define the reStructuredText file path.  The order of th
 - include a Markdown file that has a .md file extension
 - include a Markdown file named README (case-insensitive)
 
+## Uninstall `md2rst`
+
+If you installed the executable on the default path (or modified the prefix variable and maintained the original Makefile), you can uninstall `md2rst` with the command:
+
+```
+$ make uninstall
+```
+
+If you don't have the original Makefile, you can uninstall the executable with the following command:
+
+```
+$ rm $(which md2rst)
+```
+
 ## Issues
 
 If you have any problems with the script, please [file a new issue report](https://github.com/chrissimpkins/md2rst/issues/new) on the Github repository.
