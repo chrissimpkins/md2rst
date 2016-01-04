@@ -82,9 +82,11 @@ def main(args):
         elif len(args) == 1:
             mdpath = args[0]
             if "." in mdpath:
-                rstpath_base = os.path.basename(mdpath)
-                rstpath_pre = rstpath_base.split(".")[0]
-                rstpath = rstpath_pre + ".rst"
+                rstpath_dir = os.path.split(mdpath)[0]
+                rstpath_basename = os.path.basename(mdpath)
+                rstpath_pre = rstpath_basename.split(".")[0]
+                rstpath_base = rstpath_pre + ".rst"
+                rstpath = os.path.join(rstpath_dir, rstpath_base)
             else:
                 rstpath = mdpath + ".rst"
 
