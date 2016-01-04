@@ -88,7 +88,7 @@ def main(args):
                 os.makedirs(rstdirpath)
 
             ## TODO: add file path check for the expected file
-            if convert(mdpath, rstpath) is True:
+            if convert(mdpath, rstpath) is True and os.path.isfile(rstpath):
                 response_string = "[md2rst] '" + mdpath + "' was converted to '" + rstpath + "'."
                 print(response_string)
                 sys.exit(0)
@@ -106,7 +106,7 @@ def main(args):
             else:
                 rstpath = mdpath + ".rst"
 
-            if convert(mdpath, rstpath) is True:
+            if convert(mdpath, rstpath) is True and os.path.isfile(rstpath):
                 response_string = "[md2rst] '" + mdpath + "' was converted to '" + rstpath + "'."
                 print(response_string)
                 sys.exit(0)
