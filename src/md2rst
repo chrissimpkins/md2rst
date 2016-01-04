@@ -60,10 +60,10 @@ def main(args):
             pathone_basename = os.path.basename(pathone)
             pathtwo_basename = os.path.basename(pathtwo)
 
-            if pathone.lower().endswith(".md"):
+            if pathone.lower().endswith(".md") or pathone.lower().endswith(".markdown"):
                 mdpath = pathone
                 rstpath = pathtwo
-            elif pathtwo.lower().endswith(".md"):
+            elif pathtwo.lower().endswith(".md") or pathtwo.lower().endswith(".markdown"):
                 mdpath = pathtwo
                 rstpath = pathone
             elif pathone_basename.lower() == "readme":
