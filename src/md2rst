@@ -120,7 +120,7 @@ if __name__ == '__main__':
         sys.stderr.write("[md2rst] Error: Please include at least one filepath argument in your command.\n")
         sys.exit(1)
     elif sys.argv[1] == "-u" or sys.argv[1] == "--usage":
-        print("$ md2rst [Markdown file path] <rst file path>")
+        print("Usage:  md2rst [Markdown file path] <rst file path>")
         sys.exit(0)
     elif sys.argv[1] == "-h" or sys.argv[1] == "--help":
         help_string = """
