@@ -87,7 +87,6 @@ def main(args):
             else:  # directory does not exist and it is not the pwd
                 os.makedirs(rstdirpath)
 
-            ## TODO: add file path check for the expected file
             if convert(mdpath, rstpath) is True and os.path.isfile(rstpath):
                 response_string = "[md2rst] '" + mdpath + "' was converted to '" + rstpath + "'."
                 print(response_string)
