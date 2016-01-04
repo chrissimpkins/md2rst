@@ -124,6 +124,21 @@ cd ..
 
 
 # [ TEST ]
+#  Multi argument test with Markdown file that has .markdown extension + write to same directory
+cd testdir
+md2rst TEST.markdown TEST.rst
+
+if [[ -f TEST.rst ]]; then
+	rm TEST.rst
+else
+	echo "'md2rst TEST.markdown TEST.rst' failed"
+	FAILURES=1
+fi
+
+cd ..
+
+
+# [ TEST ]
 #  Multi argument test with Markdown file that does not have .md extension but is named README + write to same directory
 cd testdir
 md2rst README TEST.rst
