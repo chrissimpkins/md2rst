@@ -76,6 +76,8 @@ Add a second argument to define the reStructuredText file path.  The order of th
 - include a Markdown file that has a .md file extension
 - include a Markdown file named README (case-insensitive) without a file extension
 
+`md2rst` supports recursive directory path creation for requests to write to a non-existent directory path.
+
 ## Uninstall `md2rst`
 
 If you installed the executable on the default path (or modified the prefix variable and maintained the original Makefile), you can uninstall `md2rst` with the command:
