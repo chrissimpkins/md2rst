@@ -139,7 +139,7 @@ USAGE
 
   $ md2rst [Markdown file path] <rst file path>
 
-  The rst file path is optional.  The default write occurs in the same directory as the Markdown file and uses the same file name.
+  The rst file path is optional.  The default write occurs in the same directory as the Markdown file and uses the same file name if the rst path is not specified.
 """
         print(help_string)
     elif sys.argv[1] == "-v" or sys.argv[1] == "--version":
