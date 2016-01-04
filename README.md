@@ -18,7 +18,7 @@
 
 ### Install Pandoc
 
-OS X users can install with Pandoc with Homebrew:
+OS X users can install Pandoc with Homebrew:
 
 ```
 ▶ brew install pandoc
