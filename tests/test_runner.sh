@@ -218,6 +218,25 @@ fi
 cd ..
 
 
+# [ TEST ]
+#   Test recursive directory path creation from a different directory than the Markdown file for requests that specify non-existent directory path
+if [[ -d testdir/newdir ]]; then
+	rm -rf newdir
+fi
+
+md2rst testdir/TEST.md testdir/newdir/TEST.rst
+
+if [[ -f testdir/newdir/TEST.rst ]]; then
+	cd testdir && rm -rf newdir
+	cd ..
+else
+	echo "'md2rst TEST.md newdir/TEST.rst' failed"
+	FAILURES=1
+fi
+
+
+
+
 # Report on whether all tests passed
 if [[ $FAILURES -eq 0 ]]; then
 	echo "\nALL TESTS PASSED!"
