@@ -9,10 +9,10 @@
 ## Quickstart
 
 - Confirm that Pandoc is installed on your system
-- `$ git clone https://github.com/chrissimpkins/md2rst.git`
-- `$ make install`
-- `$ md2rst [Markdown file path]` (.rst file write defaults to same directory and original filename)
-- `$ md2rst [Markdown file path] [rst file path]` (define .rst file path)
+- `▶ git clone https://github.com/chrissimpkins/md2rst.git`
+- `▶ make install`
+- `▶ md2rst [Markdown file path]` (.rst file write defaults to same directory and original filename)
+- `▶ md2rst [Markdown file path] [rst file path]` (define .rst file path)
 
 ## Install
 
@@ -23,7 +23,7 @@ Install Pandoc using the [install instructions](http://pandoc.org/installing.htm
 Confirm your Pandoc install with:
 
 ```
-$ which pandoc
+▶ which pandoc
 ```
 
 If the above command reports a path to your `pandoc` executable, you're good to go.
@@ -33,7 +33,7 @@ If the above command reports a path to your `pandoc` executable, you're good to 
 Obtain the repository files with git:
 
 ```
-$ git clone https://github.com/chrissimpkins/md2rst.git
+▶ git clone https://github.com/chrissimpkins/md2rst.git
 ```
 
 or [download the source repository](https://github.com/chrissimpkins/md2rst/archive/master.zip) and unpack it.
@@ -41,7 +41,7 @@ or [download the source repository](https://github.com/chrissimpkins/md2rst/arch
 Navigate to the top level of the repository and install `md2rst` with the following command:
 
 ```
-$ make install
+▶ make install
 ```
 
 `md2rst` is installed on the path `/usr/local/bin/md2rst` by default.  You can modify the [prefix variable in the Makefile](https://github.com/chrissimpkins/md2rst/blob/master/Makefile#L1) to change the install path.
@@ -51,7 +51,7 @@ $ make install
 ### Default
 
 ```
-$ md2rst [Markdown file path]
+▶ md2rst [Markdown file path]
 ```
 
 By default, `md2rst` writes the reStructuredText file in the directory that contains the Markdown file and uses the same base file name as the Markdown file.
@@ -59,7 +59,7 @@ By default, `md2rst` writes the reStructuredText file in the directory that cont
 ### Define reStructuredText file path
 
 ```
-$ md2rst [Markdown file path] [rst file path]
+▶ md2rst [Markdown file path] [rst file path]
 ```
 
 Add a second argument to define the reStructuredText file path.  The order of the file paths in the command is not relevant if you either:
@@ -72,13 +72,13 @@ Add a second argument to define the reStructuredText file path.  The order of th
 If you installed the executable on the default path (or modified the prefix variable and maintained the original Makefile), you can uninstall `md2rst` with the command:
 
 ```
-$ make uninstall
+▶ make uninstall
 ```
 
 If you don't have the original Makefile, you can uninstall the executable with the following command:
 
 ```
-$ rm $(which md2rst)
+▶ rm $(which md2rst)
 ```
 
 ## Issues
