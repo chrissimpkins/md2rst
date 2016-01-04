@@ -18,13 +18,21 @@
 
 ### Install Pandoc
 
-Install Pandoc using the [install instructions](http://pandoc.org/installing.html) provided on pandoc.org.
+OS X users can install with Pandoc with Homebrew:
+
+```
+▶ brew install pandoc
+```
+
+Pandoc can be installed on many commonly used Linux distros through the distro package manager.
 
 Confirm your Pandoc install with:
 
 ```
 ▶ which pandoc
 ```
+
+For additional details, please see the [install instructions](http://pandoc.org/installing.html) provided on pandoc.org.
 
 If the above command reports a path to your `pandoc` executable, you're good to go.
 
