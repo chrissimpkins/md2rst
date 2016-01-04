@@ -73,8 +73,11 @@ def main(args):
                 mdpath = pathtwo
                 rstpath = pathone
             else:
-                sys.stderr.write("[md2rst] Error: Unable to detect the Markdown file in your command.  Please use a Markdown file path that has a .md extension or uses the non-case sensitive file name README.\n")
-                sys.exit(1)
+                # default to argument 1 = MD path
+                #            argument 2 = RST path
+                # if cannot detect with the above algorithm
+                mdpath = pathone
+                rstpath = pathtwo
 
             # test for directory path, make it if it doesn't exist (Pandoc does not perform recursive directory writes)
             rstdirpath_list = os.path.split(rstpath)
@@ -84,6 +87,7 @@ def main(args):
             else:  # directory does not exist and it is not the pwd
                 os.makedirs(rstdirpath)
 
+            ## TODO: add file path check for the expected file
             if convert(mdpath, rstpath) is True:
                 response_string = "[md2rst] '" + mdpath + "' was converted to '" + rstpath + "'."
                 print(response_string)
