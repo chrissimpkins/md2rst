@@ -75,7 +75,7 @@ def main(args):
                 sys.exit(1)
 
             if convert(mdpath, rstpath) is True:
-                response_string = "[md2rst] '" + mdpath + "'' was converted to '" + rstpath + "'."
+                response_string = "[md2rst] '" + mdpath + "' was converted to '" + rstpath + "'."
                 print(response_string)
                 sys.exit(0)
             else:
@@ -93,7 +93,7 @@ def main(args):
                 rstpath = mdpath + ".rst"
 
             if convert(mdpath, rstpath) is True:
-                response_string = "[md2rst] '" + mdpath + "'' was converted to '" + rstpath + "'."
+                response_string = "[md2rst] '" + mdpath + "' was converted to '" + rstpath + "'."
                 print(response_string)
                 sys.exit(0)
             else:
