@@ -73,7 +73,7 @@ By default, `md2rst` writes the reStructuredText file in the directory that cont
 
 Add a second argument to define the reStructuredText file path.  The order of the file paths in the command is not relevant if you either:
 
-- include a Markdown file that has a .md file extension
+- include a Markdown file that has a .md or .markdown file extension
 - include a Markdown file named README (case-insensitive) without a file extension
 
 `md2rst` supports recursive directory path creation for requests to write to a non-existent directory path.
