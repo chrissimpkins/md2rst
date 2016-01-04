@@ -1,9 +1,9 @@
 prefix=/usr/local
 
-install: md2rst
-	install -m 0755 md2rst $(prefix)/bin
+install: src/md2rst
+	install -m 0755 src/md2rst $(prefix)/bin
 
-clean: md2rst
+clean: src/md2rst
 	rm $(prefix)/bin/md2rst
 
 .PHONY: install clean
