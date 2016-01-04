@@ -72,7 +72,7 @@ Add a second argument to define the reStructuredText file path.  The order of th
 If you installed the executable on the default path (or modified the prefix variable and maintained the original Makefile), you can uninstall `md2rst` with the command:
 
 ```
-▶ make uninstall
+▶ make clean
 ```
 
 If you don't have the original Makefile, you can uninstall the executable with the following command:
