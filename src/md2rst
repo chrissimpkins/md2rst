@@ -14,6 +14,8 @@ import sys
 import os
 import subprocess
 
+VERSION = "v0.9.0"
+
 #  Modified from http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
 def which(program):
     """Test for the existence of an executable by defined executable path or on the system PATH"""
@@ -130,5 +132,7 @@ USAGE
   The rst file path is optional.  The default write occurs in the same directory as the Markdown file and uses the same file name.
 """
         print(help_string)
+    elif sys.argv[1] == "-v" or sys.argv[1] == "--version":
+        print("md2rst " + VERSION)
     else:
         main(sys.argv[1:])
