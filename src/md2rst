@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #
 #  md2rst
 #  Copyright 2016 Christopher Simpkins
 #  Source: https://github.com/chrissimpkins/md2rst
 #  MIT license
 #
-#  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 import sys
 import os
@@ -105,5 +105,28 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         sys.stderr.write("[md2rst] Error: Please include at least one filepath argument in your command.\n")
         sys.exit(1)
+    elif sys.argv[1] == "-u" or sys.argv[1] == "--usage":
+        print("$ md2rst [Markdown file path] <rst file path>")
+        sys.exit(0)
+    elif sys.argv[1] == "-h" or sys.argv[1] == "--help":
+        help_string = """
+--------------------------------------------------
+  md2rst
+  Copyright 2016 Christopher Simpkins
+  Source: https://github.com/chrissimpkins/md2rst
+  MIT license
+--------------------------------------------------
+
+ABOUT
+
+  md2rst is a Python script that converts Markdown syntax files to reStructuredText syntax files with Pandoc.  A Pandoc install on your system is mandatory in order to use the script.
+
+USAGE
+
+  $ md2rst [Markdown file path] <rst file path>
+
+  The rst file path is optional.  The default write occurs in the same directory as the Markdown file and uses the same file name.
+"""
+        print(help_string)
     else:
         main(sys.argv[1:])
