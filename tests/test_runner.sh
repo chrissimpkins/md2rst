@@ -90,7 +90,7 @@ fi
 
 
 # [ TEST ]
-#  Single argument test from a different directory with a Markdown file that does not have a .md file extension
+#  Single argument test from a different directory with a Markdown file that does not have a .md file extension writes to MD file containing dir
 md2rst testdir/TEST
 
 if [[ -f testdir/TEST.rst ]]; then
@@ -235,8 +235,57 @@ else
 fi
 
 
+# [ TEST ]
+#  test reversed order of the filepaths on the command line with Markdown file that has .md file extension
+cd testdir
+md2rst TEST.rst TEST.md
+
+if [[ -f TEST.rst ]]; then
+	rm TEST.rst
+else
+	echo "'md2rst TEST.rst TEST.md' failed"
+	FAILURES=1
+fi
+
+cd ..
 
 
+# [ TEST ]
+#  test reversed order of the filepaths on the command line with Markdown file that does not have .md file extension but is named README
+cd testdir
+md2rst TEST.rst README
+
+if [[ -f TEST.rst ]]; then
+	rm TEST.rst
+else
+	echo "'md2rst TEST.rst README' failed"
+	FAILURES=1
+fi
+
+cd ..
+
+
+# [ TEST ]
+#  test reversed order of filepaths on the command line with Markdown file that does not have .md extension and is not named README
+cd testdir
+md2rst TEST.rst TEST 2>/dev/null
+
+if (( $? )); then
+	# if returns exit status code 1 (command failed), then test passed
+	echo "'md2rst TEST.rst TEST' passed"
+else
+	if [[ -f TEST.rst ]]; then
+		echo "'md2rst TEST.rst TEST' failed"
+		FAILURES=1
+	else
+		echo "'md2rst TEST.rst TEST' passed"
+	fi
+fi
+
+cd ..
+
+
+# [ REPORT ]
 # Report on whether all tests passed
 if [[ $FAILURES -eq 0 ]]; then
 	echo "\nALL TESTS PASSED!"
