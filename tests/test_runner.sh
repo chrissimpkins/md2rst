@@ -1,5 +1,30 @@
 #!/bin/sh
 
+FAILURES=0
+
+# -----------------------
+#
+# Install test
+#
+# -----------------------
+
+
+# [ TEST ]
+#  confirms install success and installs the latest version for subsequent tests
+#  NOTE: do not move this test below any of the following tests
+cd ..
+make install
+
+if (( $? )); then
+	echo "'make install' test failed"
+	FAILURES=1
+else
+	echo "'make install' test passed"
+fi
+
+cd tests
+
+
 # -----------------------
 #
 # Single argument tests
@@ -11,7 +36,6 @@
 cd testdir
 md2rst TEST.md
 
-FAILURES=0
 
 if [[ -f TEST.rst ]]; then
 	rm TEST.rst
@@ -77,6 +101,13 @@ else
 fi
 
 
+# -----------------------
+#
+# Multi argument tests
+#
+# -----------------------
+
+
 # [ TEST ]
 #  Multi argument test with Markdown file that has .md extension + write to same directory
 cd testdir
@@ -113,6 +144,7 @@ cd testdir
 md2rst TEST TEST.rst 2>/dev/null
 
 if (( $? )); then
+	# if returns exit status code 1 (command failed), then test passed
 	echo "md2rst TEST TEST.rst passed"
 else
 	if [[ -f TEST.rst ]]; then
@@ -125,6 +157,65 @@ fi
 
 cd ..
 
+
+# [ TEST ]
+#  Multi argument test from different directory with Markdown file that has .md extension + write to same directory
+md2rst testdir/TEST.md testdir/TEST.rst
+
+if [[ -f testdir/TEST.rst ]]; then
+	rm testdir/TEST.rst
+else
+	echo "'md2rst testdir/TEST.md testdir/TEST.rst' failed"
+	FAILURES=1
+fi
+
+
+# [ TEST ]
+#  Multi argument test from different directory with Markdown file that does not have .md extension but is named README + write to same directory
+md2rst testdir/README testdir/TEST.rst
+
+if [[ -f testdir/TEST.rst ]]; then
+	rm testdir/TEST.rst
+else
+	echo "'md2rst testdir/README testdir/TEST.rst' failed"
+	FAILURES=1
+fi
+
+
+# [ TEST ]
+#  Multi argument test from different directory for failure with Markdown file that does not have .md extension and is not named README
+md2rst testdir/TEST testdir/TEST.rst 2>/dev/null
+
+if (( $? )); then
+	# if returns exit status code 1 (command failed), then test passed
+	echo "md2rst testdir/TEST testdir/TEST.rst passed"
+else
+	if [[ -f TEST.rst ]]; then
+		echo "'md2rst testdir/TEST testdir/TEST.rst' failed"
+		FAILURES=1
+	else
+		echo "md2rst testdir/TEST testdir/TEST.rst passed"
+	fi
+fi
+
+
+# [ TEST ]
+#   Test recursive directory path creation for requests that specify non-existent directory path
+cd testdir
+if [[ -d newdir ]]; then
+	rm -rf newdir
+fi
+
+md2rst TEST.md newdir/TEST.rst
+
+if [[ -f newdir/TEST.rst ]]; then
+	rm -rf newdir
+else
+	echo "'md2rst TEST.md newdir/TEST.rst' failed"
+	FAILURES=1
+fi
+
+cd ..
 
 
 # Report on whether all tests passed
