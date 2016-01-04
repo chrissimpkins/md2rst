@@ -139,7 +139,7 @@ cd ..
 
 
 # [ TEST ]
-#  Multi argument test with Markdown file that does not have .md extension but is named README + write to same directory
+#  Multi argument test with Markdown file that does not have .md / .markdown extension but is named README + write to same directory
 cd testdir
 md2rst README TEST.rst
 
@@ -154,19 +154,35 @@ cd ..
 
 
 # [ TEST ]
-#  Multi argument test for failure with Markdown file that does not have .md extension and is not named README
+#  Multi argument test for failure with Markdown file that does not have .md / .markdown extension and is not named README, but is correct positional argument
 cd testdir
-md2rst TEST TEST.rst 2>/dev/null
+md2rst TEST TEST.rst
+
+if [[ -f TEST.rst ]]; then
+	rm TEST.rst
+else
+	echo "'md2rst TEST TEST.rst' failed"
+	FAILURES=1
+fi
+
+cd ..
+
+
+# [ TEST ]
+#  Multi argument test for failure with Markdown file that does not have .md / .markdown extension and is not named README and is not correct positional argument (should fail)
+cd testdir
+md2rst TEST.rst TEST 2>/dev/null
 
 if (( $? )); then
 	# if returns exit status code 1 (command failed), then test passed
-	echo "md2rst TEST TEST.rst passed"
+	echo "md2rst TEST.rst TEST passed"
 else
 	if [[ -f TEST.rst ]]; then
-		echo "'md2rst TEST TEST.rst' failed"
+		echo "'md2rst TEST.rst TEST' failed"
+		rm TEST.rst
 		FAILURES=1
 	else
-		echo "md2rst TEST TEST.rst passed"
+		echo "md2rst TEST.rst TEST passed"
 	fi
 fi
 
@@ -279,25 +295,6 @@ fi
 
 cd ..
 
-
-# [ TEST ]
-#  test reversed order of filepaths on the command line with Markdown file that does not have .md extension and is not named README
-cd testdir
-md2rst TEST.rst TEST 2>/dev/null
-
-if (( $? )); then
-	# if returns exit status code 1 (command failed), then test passed
-	echo "'md2rst TEST.rst TEST' passed"
-else
-	if [[ -f TEST.rst ]]; then
-		echo "'md2rst TEST.rst TEST' failed"
-		FAILURES=1
-	else
-		echo "'md2rst TEST.rst TEST' passed"
-	fi
-fi
-
-cd ..
 
 
 # [ REPORT ]
