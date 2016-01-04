@@ -71,7 +71,7 @@ def main(args):
                 mdpath = pathtwo
                 rstpath = pathone
             else:
-                sys.stderr.write("[md2rst] Error: Unable to detect the Markdown file in your command.  Please use a Markdown file path that has a .md extension or uses the non-case sensitive file name README.")
+                sys.stderr.write("[md2rst] Error: Unable to detect the Markdown file in your command.  Please use a Markdown file path that has a .md extension or uses the non-case sensitive file name README.\n")
                 sys.exit(1)
 
             if convert(mdpath, rstpath) is True:
@@ -79,7 +79,7 @@ def main(args):
                 print(response_string)
                 sys.exit(0)
             else:
-                sys.stderr.write("[md2rst] Error: There was an error with the Pandoc conversion")
+                sys.stderr.write("[md2rst] Error: There was an error with the Pandoc conversion\n")
                 sys.exit(1)
         elif len(args) == 1:
             mdpath = args[0]
@@ -97,7 +97,7 @@ def main(args):
                 print(response_string)
                 sys.exit(0)
             else:
-                sys.stderr.write("[md2rst] Error: There was an error with the Pandoc conversion")
+                sys.stderr.write("[md2rst] Error: There was an error with the Pandoc conversion\n")
                 sys.exit(1)
 
     else:
