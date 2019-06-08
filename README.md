@@ -65,6 +65,11 @@ Navigate to the top level of the repository and install `md2rst` with the follow
 
 By default, `md2rst` writes the reStructuredText file in the directory that contains the Markdown file and uses the same base file name as the Markdown file.
 
+```
+▶ m2r *.md
+```
+This converts all the Markdown Files in a Directory to reStructuredText files. 
+
 ### Define reStructuredText file path
 
 ```
